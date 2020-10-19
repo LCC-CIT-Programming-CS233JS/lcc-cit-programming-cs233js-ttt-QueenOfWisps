@@ -28,7 +28,7 @@ function init()
 }
 function handleClick(event) {
     //this event is not explicit in its calling, it is only used inside of this function
-    //we can refer to the event and the object by using event.target.id
+    //we can refer to the event  and the object by using event.target.id
 
   //this is the event. 
     // Get the id from the square and put it in a variable
@@ -42,16 +42,10 @@ function handleClick(event) {
     // Set the onclick handler for this square in the UI to an empty anonymous function or arrow function
     event.target.onclick=()=>{};
 
-    // Update the variable xIsNext
-    if(xIsNext=="O")
-    {
-        xIsNext="X";
-
-    }
-    else {xIsNext="O";}
+  
     
     // If calculateWinner returns true
-    if (calculateWinner==true){
+    if (calculateWinner()){
          // highlight the winner and disable all of the squares 
         highlightWinner();
         disableAll();
@@ -61,18 +55,27 @@ function handleClick(event) {
     { 
         if(xIsNext=="X")
         {
-            document.getElementById("status").innerHtml="Next Player: O";
+            document.getElementById("status").innerHTML="Next Player: O";
         }
         else
         {
-            document.getElementById("status").innerhtml="Next Player: X";
+            document.getElementById("status").innerHTML="Next Player: X";
         }
 
     }
+
+    
+    // Update the variable xIsNext
+    if(xIsNext=="O")
+    {
+        xIsNext="X";
+
+    }
+    else {xIsNext="O";}
         
 
    // document.getElementById("status").innerhtml=xIsNext;
-    }
+}
    
 
 
@@ -96,50 +99,67 @@ function calculateWinner() {
 
 //
 function highlightWinner() {
+    let mySquare = document.getElementsByName("square");
     var totalx=0;
     var totaly=0;
     var winner="";
-for(var i=0;i<squares.length;i++){
-    if(squares[i]=="X"){
-        totalx+=1;
+    totalnull=0;
+    for(var i=0;i<squares.length;i++){
+        if (squares[i]=="X"){
+            totalx+=1;;
+        }
+        else if(squares[i]=="O")
+        {
+            totaly+=1;;
+        }
+        else{
+            totalnull+=1;
+            
+        }
     }
-    else{ 
-        totaly+=1;
-    }
-}
     // Update the status in the UI to display the winner
     if(totalx>totaly){
         winner="X";
     }
+    else if(totaly>totalx){
+        winner="O"
+    }
     else {
         winner="O";
     }
-    document.getElementById("status").innerhtml=winner+"is the winner";
+    document.getElementById("status").innerHTML=winner+" is the winner";
     // Iterate through the winningLine array.  It contains the indices of the winning squares
     //since squares only holds the number of x or y in a given game it safe to say that we will be using mysquare which 
     //has been  populated by squares in init. 
     // the winning line contains all of the squares. //my guess is those values contain the numerical id associated with those squares. 
     //we will use a nested for loop to iterate through winningline, 
-    for(var i =0;i<winningLine.length;i++){
-         for(var j=0; i<mysquare.length;j++) {
-             if(mysquare[j]==winningline[i]){
-                document.getElementById(j).style.red
-             }
-
+   //classlist.add will add the class to the element, had this before but did not store it in a variable. this makes a difference.
+   //ask mari about how the winning line is stored. it works now was one off from completion but completion and understanding are two different things.
+ 
+    for(var i=0;i<winningLine.length;i++){
+       winnerStreak= document.getElementById(winningLine[i])
+        winnerStreak.classList.add("red");
          }  
-    }
+    
     //      get the next square using the current index in the winningLine array as the id
     //      add the class red to the square
     // Disable all of the squares
     disableAll();
 }
 
-function checkCards(){
-    
-}
+
 
 function disableAll() {
-    squares.onclick= func();
+   
+    //for(var i=0;i<squares.length;i++){
+      //  mySquare[i].onclick=()=>{};
+    //}
+
+    let mySquare = document.getElementsByName("square");
+    for(let i=0; i<mySquare.length;i++){
+        mySquare[i].onclick= ()=>{};
+    }
+   
 
     // Set the onclick handler for all squares to function that does nothing
     // The id of the square is a number 0 - 8
