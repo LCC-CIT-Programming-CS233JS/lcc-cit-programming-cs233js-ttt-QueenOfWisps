@@ -134,8 +134,7 @@ function highlightWinner() {
     // the winning line contains all of the squares. //my guess is those values contain the numerical id associated with those squares. 
     //we will use a nested for loop to iterate through winningline, 
    //classlist.add will add the class to the element, had this before but did not store it in a variable. this makes a difference.
-   //ask mari about how the winning line is stored. it works now was one off from completion but completion and understanding are two different things.
- 
+   //winning line is stored with just plain numbers even though it looks like a string in debugger. ie: 0:0
     for(var i=0;i<winningLine.length;i++){
        winnerStreak= document.getElementById(winningLine[i])
         winnerStreak.classList.add("red");
