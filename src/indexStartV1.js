@@ -26,56 +26,56 @@ function init()
         mySquare[i].onclick=handleClick;
     }
 }
-function handleClick(event) {
-    //this event is not explicit in its calling, it is only used inside of this function
-    //we can refer to the event  and the object by using event.target.id
+    function handleClick(event) {
+        //this event is not explicit in its calling, it is only used inside of this function
+        //we can refer to the event  and the object by using event.target.id
 
-  //this is the event. 
-    // Get the id from the square and put it in a variable
-    // Remember that the id is an integer 0 - 8
-   let clicked_ID =event.target.id
-     // Set the element in the squares array to the player's symbol
-   squares[clicked_ID]=xIsNext;
- // Update the inner html for this square in the UI
-   document.getElementById(clicked_ID).innerHTML=xIsNext;
+    //this is the event. 
+        // Get the id from the square and put it in a variable
+        // Remember that the id is an integer 0 - 8
+    let clicked_ID =event.target.id
+        // Set the element in the squares array to the player's symbol
+    squares[clicked_ID]=xIsNext;
+    // Update the inner html for this square in the UI
+    document.getElementById(clicked_ID).innerHTML=xIsNext;
 
-    // Set the onclick handler for this square in the UI to an empty anonymous function or arrow function
-    event.target.onclick=()=>{};
-
-  
-    
-    // If calculateWinner returns true
-    if (calculateWinner()){
-         // highlight the winner and disable all of the squares 
-        highlightWinner();
-        disableAll();
-      }
-    // otherwise update the status in the UI to display the player
-    else
-    { 
-        if(xIsNext=="X")
-        {
-            document.getElementById("status").innerHTML="Next Player: O";
-        }
-        else
-        {
-            document.getElementById("status").innerHTML="Next Player: X";
-        }
-
-    }
+        // Set the onclick handler for this square in the UI to an empty anonymous function or arrow function
+        event.target.onclick=()=>{};
 
     
-    // Update the variable xIsNext
-    if(xIsNext=="O")
-    {
-        xIsNext="X";
-
-    }
-    else {xIsNext="O";}
         
+        // If calculateWinner returns true
+        if (calculateWinner()){
+            // highlight the winner and disable all of the squares 
+            highlightWinner();
+            disableAll();
+        }
+        // otherwise update the status in the UI to display the player
+        else
+        { 
+            if(xIsNext=="X")
+            {
+                document.getElementById("status").innerHTML="Next Player: O";
+            }
+            else
+            {
+                document.getElementById("status").innerHTML="Next Player: X";
+            }
 
-   // document.getElementById("status").innerhtml=xIsNext;
-}
+        }
+
+        
+        // Update the variable xIsNext
+        if(xIsNext=="O")
+        {
+            xIsNext="X";
+
+        }
+        else {xIsNext="O";}
+            
+
+    // document.getElementById("status").innerhtml=xIsNext;
+    }
    
 
 
